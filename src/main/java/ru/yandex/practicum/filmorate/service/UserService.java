@@ -19,10 +19,18 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        if (getAllUsers().containsKey(user.getId())) {
+            throw new RuntimeException("Пользователь уже есть в базе");
+        }
+        setUserNameByLogin(user, "Добавлен");
         return userStorage.create(user);
     }
 
     public User updateUser(User user) {
+        if (!getAllUsers().containsKey(user.getId())) {
+            throw new RuntimeException("Пользователя нет в базе");
+        }
+        setUserNameByLogin(user, "Обновлен");
         return userStorage.update(user);
     }
 
