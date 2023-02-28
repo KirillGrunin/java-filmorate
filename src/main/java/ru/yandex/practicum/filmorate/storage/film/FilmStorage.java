@@ -11,8 +11,6 @@ import java.util.Map;
 
 @Component
 @Getter
-@EqualsAndHashCode
-@ToString
 public class FilmStorage {
     private final Map<Integer, Film> films = new HashMap<>();
     private static int id;
