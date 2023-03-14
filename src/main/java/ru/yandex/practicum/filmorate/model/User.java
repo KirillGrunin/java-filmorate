@@ -30,9 +30,7 @@ public class User {
 
     private String name;
 
-    /**
-     * Дата рождения должна быть моментом, датой или временем в прошлом или настоящем
-     */
+
     @PastOrPresent
     private LocalDate birthday;
 

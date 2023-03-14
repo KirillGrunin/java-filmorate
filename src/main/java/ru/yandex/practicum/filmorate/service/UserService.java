@@ -19,39 +19,29 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserStorage userStorage;
 
-    /**
-     * Получение всех пользователей
-     */
+
     public List<User> getAllUsers() {
         return userStorage.getAllUsers();
     }
 
-    /**
-     * Получение пользователя
-     */
+
     public User getUserById(Integer userId) {
         return userStorage.getUserById(userId);
     }
 
-    /**
-     * Создание нового пользователя
-     */
+
     public User createUser(User user) {
         setUserNameByLogin(user, "Добавлен");
         return userStorage.create(user);
     }
 
-    /**
-     * Редактирование пользователя
-     */
+
     public User updateUser(User user) {
         setUserNameByLogin(user, "Обновлен");
         return userStorage.update(user);
     }
 
-    /**
-     * Добавление в список друзей
-     */
+
     public void addFriend(Integer userId, Integer friendId) {
         User user = getUserById(userId);
         User friend = getUserById(friendId);
@@ -60,9 +50,7 @@ public class UserService {
         log.debug("Пользователь с id {} добавил в список друзей пользователя с id {}", userId, friendId);
     }
 
-    /**
-     * Удаление из списка друзей
-     */
+
     public void deleteFriend(Integer userId, Integer friendId) {
         User user = getUserById(userId);
         User friend = getUserById(friendId);
@@ -71,16 +59,12 @@ public class UserService {
         log.debug("Пользователь с id {} удален из списка друзей пользователем с id {}", userId, friendId);
     }
 
-    /**
-     * Получение всех друзей пользователя
-     */
+
     public List<User> getUserFriends(Integer userId) {
         return userStorage.getUserFriends(userId);
     }
 
-    /**
-     * Получение общих друзей с другим пользователем
-     */
+
     public Set<User> getMutualFriends(Integer userId, Integer otherId) {
         return getUserById(userId).getFriendsId()
                 .stream()
