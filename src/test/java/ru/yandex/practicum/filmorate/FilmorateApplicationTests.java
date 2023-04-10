@@ -13,8 +13,9 @@ import ru.yandex.practicum.filmorate.storage.dao.DBFilmStorage;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class FilmorateApplicationTests {
 
-	private final DBFilmStorage filmStorage;
-	@Test
-	void contextLoads() {
-	}
+    private final DBFilmStorage filmStorage;
+
+    @Test
+    void contextLoads() {
+    }
 }

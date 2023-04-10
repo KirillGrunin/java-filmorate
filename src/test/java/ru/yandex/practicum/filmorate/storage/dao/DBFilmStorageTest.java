@@ -31,7 +31,7 @@ class DBFilmStorageTest {
                 LocalDate.now().minusYears(8),
                 90L,
                 3,
-                new Mpa(1,"o","o"),
+                new Mpa(1, "o", "o"),
                 new ArrayList<>(),
                 new ArrayList<>());
         filmStorage.addFilm(createFilm);
@@ -48,7 +48,7 @@ class DBFilmStorageTest {
                 LocalDate.now().minusYears(8),
                 90L,
                 3,
-                new Mpa(1,"o","o"),
+                new Mpa(1, "o", "o"),
                 new ArrayList<>(),
                 new ArrayList<>());
         Film second = new Film(2,
@@ -57,7 +57,7 @@ class DBFilmStorageTest {
                 LocalDate.now().minusYears(15),
                 100L,
                 2,
-                new Mpa(3,"o","o"),
+                new Mpa(3, "o", "o"),
                 new ArrayList<>(),
                 new ArrayList<>());
         filmStorage.addFilm(first);
@@ -75,7 +75,7 @@ class DBFilmStorageTest {
                 LocalDate.now().minusYears(8),
                 90L,
                 3,
-                new Mpa(1,"o","o"),
+                new Mpa(1, "o", "o"),
                 new ArrayList<>(),
                 new ArrayList<>());
         Film added = filmStorage.addFilm(first);
@@ -93,7 +93,7 @@ class DBFilmStorageTest {
                 LocalDate.now().minusYears(8),
                 90L,
                 3,
-                new Mpa(1,"o","o"),
+                new Mpa(1, "o", "o"),
                 new ArrayList<>(),
                 new ArrayList<>());
         Film second = new Film(0,
@@ -102,7 +102,7 @@ class DBFilmStorageTest {
                 LocalDate.now().minusYears(15),
                 100L,
                 2,
-                new Mpa(3,"o","o"),
+                new Mpa(3, "o", "o"),
                 new ArrayList<>(),
                 new ArrayList<>());
         Film addedFirst = filmStorage.addFilm(first);

@@ -26,7 +26,7 @@ class FilmServiceTest {
         Film film = new Film();
         film.setName("Correct Name");
         film.setDescription("Correct description.");
-        film.setReleaseDate(LocalDate.of(1995,5,26));
+        film.setReleaseDate(LocalDate.of(1995, 5, 26));
         film.setDuration(100L);
         film.setRate(0);
         film.setMpa(new Mpa(1, "mpa", "description"));
@@ -39,7 +39,7 @@ class FilmServiceTest {
         Film film = new Film();
         film.setName("");
         film.setDescription("Correct description");
-        film.setReleaseDate(LocalDate.of(1895,12,28));
+        film.setReleaseDate(LocalDate.of(1895, 12, 28));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         FilmValidationException ex = assertThrows(FilmValidationException.class, () -> service.add(film));
@@ -52,7 +52,7 @@ class FilmServiceTest {
         Film film = new Film();
         film.setName("  ");
         film.setDescription("Correct description");
-        film.setReleaseDate(LocalDate.of(1895,12,28));
+        film.setReleaseDate(LocalDate.of(1895, 12, 28));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         FilmValidationException ex = assertThrows(FilmValidationException.class, () -> service.add(film));
@@ -65,7 +65,7 @@ class FilmServiceTest {
         Film film = new Film();
         film.setName("Correct Name");
         film.setDescription("Correct description");
-        film.setReleaseDate(LocalDate.of(1995,5,26));
+        film.setReleaseDate(LocalDate.of(1995, 5, 26));
         film.setDuration(-100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         FilmValidationException ex = assertThrows(FilmValidationException.class, () -> service.add(film));
@@ -78,7 +78,7 @@ class FilmServiceTest {
         Film film = new Film();
         film.setName("Correct Name");
         film.setDescription("Correct description");
-        film.setReleaseDate(LocalDate.of(1895,12,27));
+        film.setReleaseDate(LocalDate.of(1895, 12, 27));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         FilmValidationException ex = assertThrows(FilmValidationException.class, () -> service.add(film));
@@ -91,7 +91,7 @@ class FilmServiceTest {
         Film film = new Film();
         film.setName("Correct Name");
         film.setDescription("Correct description.");
-        film.setReleaseDate(LocalDate.of(1895,12,28));
+        film.setReleaseDate(LocalDate.of(1895, 12, 28));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         Film addedFilm = service.add(film);
@@ -105,7 +105,7 @@ class FilmServiceTest {
         film.setDescription("Failed description. Failed description. Failed description. Failed description. " +
                 "Failed description. Failed description. Failed description. Failed description. " +
                 "Failed description. Failed description. F");
-        film.setReleaseDate(LocalDate.of(1995,5,26));
+        film.setReleaseDate(LocalDate.of(1995, 5, 26));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         FilmValidationException ex = assertThrows(FilmValidationException.class, () -> service.add(film));
@@ -120,7 +120,7 @@ class FilmServiceTest {
         film.setDescription("Correct description. Correct description. Correct description. Correct description. " +
                 "Correct description. Correct description. Correct description. Correct description. " +
                 "Correct description. Correct des");
-        film.setReleaseDate(LocalDate.of(1995,5,26));
+        film.setReleaseDate(LocalDate.of(1995, 5, 26));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         Film addedFilm = service.add(film);
@@ -133,7 +133,7 @@ class FilmServiceTest {
         film.setId(999);
         film.setName("Correct Name");
         film.setDescription("Correct description.");
-        film.setReleaseDate(LocalDate.of(1995,5,26));
+        film.setReleaseDate(LocalDate.of(1995, 5, 26));
         film.setDuration(100L);
         film.setMpa(new Mpa(1, "mpa", "description"));
         NotFoundException ex = assertThrows(NotFoundException.class, () -> service.update(film));
