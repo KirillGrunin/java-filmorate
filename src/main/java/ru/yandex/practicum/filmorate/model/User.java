@@ -1,52 +1,50 @@
 package ru.yandex.practicum.filmorate.model;
 
-import javax.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.PositiveOrZero;
-
-import lombok.Data;
-import ru.yandex.practicum.filmorate.annotations.CorrectLogin;
-
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
-@Valid
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
-    @PositiveOrZero(message = "id can not be negative")
+
     private int id;
-
-    @NotNull(message = "login must not be null")
-    @Email(message = "invalid email")
+    @Email(message = "Введенное значение не является адресом электронной почты.")
     private String email;
-
-    @NotBlank(message = "login must not be empty")
-    @CorrectLogin
+    @NotBlank
+    @Pattern(regexp = "^\\S*$", message = "Логин не может содержать пробелы.")
     private String login;
-
     private String name;
-
-
-    @PastOrPresent
+    @PastOrPresent(message = "Дата рождения не может быть в будущем.")
     private LocalDate birthday;
+    private List<Integer> friends;
 
-    private Set<Integer> friends;
-
-    public void addFriend(Integer id) {
-        if (friends == null) {
-            friends = new HashSet<>();
-        }
-        friends.add(id);
+    public boolean addFriend(final Integer id) {
+        return friends.add(id);
     }
 
-    public Set<Integer> getFriendsId() {
-        if (friends == null) {
-            friends = new HashSet<>();
-        }
-        return friends;
+    public boolean deleteFriend(final Integer id) {
+        return friends.remove(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId() == user.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
