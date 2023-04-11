@@ -38,7 +38,7 @@ public class DBGenreStorage implements GenreStorage {
     @Override
     public Collection<Genre> getGenresByFilmId(int filmId) {
         String sqlGenre = "select GENRE.GENREID, NAME from GENRE " +
-                "INNER JOIN GENRELINE GL on GENRE.GENREID = GL.GENREID " +
+                "JOIN GENRELINE GL on GENRE.GENREID = GL.GENREID " +
                 "where FILMID = ?";
         return jdbcTemplate.query(sqlGenre, this::makeGenre, filmId);
     }

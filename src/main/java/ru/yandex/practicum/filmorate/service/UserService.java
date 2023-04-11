@@ -15,6 +15,7 @@ import javax.validation.Validator;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -73,15 +74,9 @@ public class UserService {
 
 
     public Collection<User> getCommonFriends(final String supposedUserId, final String supposedOtherId) {
-        User user = getStoredUser(supposedUserId);
-        User otherUser = getStoredUser(supposedOtherId);
-        Collection<User> commonFriends = new HashSet<>();
-        for (Integer id : user.getFriends()) {
-            if (otherUser.getFriends().contains(id)) {
-                commonFriends.add(userStorage.getUser(id));
-            }
-        }
-        return commonFriends;
+        Collection<User> user = getFriends(supposedUserId);
+        Collection<User> otherUser = getFriends(supposedOtherId);
+        return user.stream().filter(otherUser::contains).collect(Collectors.toList());
     }
 
 
@@ -115,16 +110,12 @@ public class UserService {
         try {
             return Integer.valueOf(supposedId);
         } catch (NumberFormatException exception) {
-            return Integer.MIN_VALUE;
+            throw new WrongIdException("Некорректный id");
         }
     }
 
     private User getStoredUser(final String supposedId) {
         final int userId = idFromString(supposedId);
-        if (userId == Integer.MIN_VALUE) {
-            throw new WrongIdException("Не удалось распознать идентификатор пользователя: " +
-                    "значение " + supposedId);
-        }
         User user = userStorage.getUser(userId);
         if (user == null) {
             throw new NotFoundException("Пользователь с идентификатором " +
