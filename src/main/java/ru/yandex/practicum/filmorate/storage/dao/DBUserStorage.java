@@ -2,6 +2,8 @@ package ru.yandex.practicum.filmorate.storage.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -33,6 +35,18 @@ public class DBUserStorage implements UserStorage {
                     id + " не зарегистрирован!");
         }
         return user;
+    }
+
+    public List<User> getUsersByIds(List<Integer> ids) {
+        String sqlUser = "select * from USERS where USERID in (:ids)";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(Objects.requireNonNull(jdbcTemplate.getDataSource()));
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("ids", ids);
+        List<User> users = namedParameterJdbcTemplate.query(sqlUser, parameters, (rs, rowNum) -> makeUser(rs));
+        if (users.isEmpty()) {
+            throw new NotFoundException("Пользователи с идентификаторами " + ids.toString() + " не зарегистрированы!");
+        }
+        return users;
     }
 
     @Override

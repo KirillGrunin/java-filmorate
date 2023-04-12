@@ -12,10 +12,7 @@ import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -74,9 +71,12 @@ public class UserService {
 
 
     public Collection<User> getCommonFriends(final String supposedUserId, final String supposedOtherId) {
-        Collection<User> user = getFriends(supposedUserId);
-        Collection<User> otherUser = getFriends(supposedOtherId);
-        return user.stream().filter(otherUser::contains).collect(Collectors.toList());
+        User user = getStoredUser(supposedUserId);
+        User otherUser = getStoredUser(supposedOtherId);
+        Set<Integer> commonFriendIds = new HashSet<>(user.getFriends());
+        commonFriendIds.retainAll(otherUser.getFriends());
+        List<Integer> commonFriends = new ArrayList<>(commonFriendIds);
+        return userStorage.getUsersByIds(commonFriends);
     }
 
 
